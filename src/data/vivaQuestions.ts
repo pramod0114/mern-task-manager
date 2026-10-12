@@ -1,0 +1,88 @@
+import { VivaQuestion } from '../types';
+
+export const VIVA_QUESTIONS: VivaQuestion[] = [
+  {
+    id: 1,
+    question: 'What does the MERN stack stand for and how does data flow between its layers?',
+    answer: 'MERN stands for MongoDB (NoSQL Database), Express.js (Backend Web Framework), React.js (Frontend UI Library), and Node.js (JavaScript Runtime). Data flows as follows: The user interacts with React UI -> React sends HTTP fetch/axios requests to Express API routes running on Node.js -> Express uses Mongoose ODM to query or mutate documents in MongoDB Atlas -> MongoDB returns BSON documents -> Express converts them to JSON and responds to React -> React updates state and re-renders the UI.',
+    category: 'Architecture',
+    difficulty: 'Basic',
+  },
+  {
+    id: 2,
+    question: 'What is the difference between SQL databases and MongoDB NoSQL?',
+    answer: 'SQL databases (like MySQL/PostgreSQL) are relational, use strict table schemas with rows and columns, and rely on foreign keys and ACID-compliant joins. MongoDB is a document-oriented NoSQL database that stores data in flexible, schema-less BSON (Binary JSON) documents organized in collections. MongoDB scales horizontally via sharding and allows nested sub-documents and arrays.',
+    category: 'MongoDB',
+    difficulty: 'Basic',
+  },
+  {
+    id: 3,
+    question: 'What is Mongoose and why do we use it in a Node.js project instead of the native MongoDB driver?',
+    answer: 'Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js. While MongoDB is schema-less, Mongoose provides schema validation, type casting, middleware hooks (pre/post save), default values, custom methods, and built-in query helpers. It brings structure, reliability, and validation to application data.',
+    category: 'MongoDB',
+    difficulty: 'Intermediate',
+  },
+  {
+    id: 4,
+    question: 'What is CORS (Cross-Origin Resource Sharing) and why is it needed in a MERN project?',
+    answer: 'CORS is a browser security mechanism that restricts web pages from making HTTP requests to a domain, port, or protocol different from the one that served the web page. In local development, React runs on http://localhost:5173 while Express runs on http://localhost:5000. Because the ports differ, the browser blocks requests unless the Express server includes proper Access-Control-Allow-Origin headers using the cors middleware.',
+    category: 'Express & Node',
+    difficulty: 'Intermediate',
+  },
+  {
+    id: 5,
+    question: 'What is the difference between PUT and PATCH HTTP methods in RESTful API design?',
+    answer: 'PUT is used for full replacement: it replaces the entire target resource with the uploaded representation. Missing fields are typically overwritten or reset to default. PATCH is used for partial modification: only the specified fields sent in the request body are updated (e.g., toggling completed: true without resending title or description).',
+    category: 'Express & Node',
+    difficulty: 'Intermediate',
+  },
+  {
+    id: 6,
+    question: 'Why should database credentials and .env files never be uploaded to GitHub?',
+    answer: '.env files contain sensitive secrets such as MongoDB Atlas connection strings with administrative passwords, JWT secrets, and API keys. If pushed to public or even private GitHub repos, bots and scrapers will automatically index them within seconds, leading to unauthorized access, database wiping, ransomware, and cloud bill spikes. Always include .env in .gitignore and supply variables via cloud platform settings (e.g., Vercel Environment Variables).',
+    category: 'Deployment & Security',
+    difficulty: 'Basic',
+  },
+  {
+    id: 7,
+    question: 'What is the role of vercel.json in deploying an Express backend to Vercel?',
+    answer: 'Vercel is primarily a serverless platform. A standard Express server uses an infinite listening loop (app.listen(port)). The vercel.json configuration tells Vercel to compile Express using the @vercel/node runtime and route incoming HTTP requests (/api/* or /*) to the Express handler function without requiring a traditional long-running VM or persistent server process.',
+    category: 'Deployment & Security',
+    difficulty: 'Advanced',
+  },
+  {
+    id: 8,
+    question: 'What are React hooks, and what are useState and useEffect used for?',
+    answer: 'React hooks are special functions that allow functional components to use state and other React features. useState declares a state variable (e.g. tasks) and a setter function (setTasks) that triggers a re-render when called. useEffect performs side-effects (such as fetching data from the Express REST API on component mount, subscribing to events, or setting timers) synchronized with component lifecycle.',
+    category: 'React',
+    difficulty: 'Basic',
+  },
+  {
+    id: 9,
+    question: 'Why does Vite require client environment variables to be prefixed with VITE_?',
+    answer: 'Vite uses static code replacement at build time. To prevent accidentally leaking private server secrets (like database passwords) into the client-side JavaScript bundle downloaded by end-users, Vite strictly bundles only environment variables that begin with VITE_ (accessed via import.meta.env.VITE_*).',
+    category: 'React',
+    difficulty: 'Intermediate',
+  },
+  {
+    id: 10,
+    question: 'What is an idempotent HTTP method? Which methods in our Task Manager API are idempotent?',
+    answer: 'An HTTP method is idempotent if making multiple identical requests has the same effect on the server state as making a single request. In our Task Manager API: GET (safe and idempotent), PUT (idempotent: saving the same object 5 times results in the same state), and DELETE (idempotent: deleting ID 123 leaves it deleted). POST is NOT idempotent because repeating it creates multiple new task entries.',
+    category: 'Express & Node',
+    difficulty: 'Intermediate',
+  },
+  {
+    id: 11,
+    question: 'What does "0.0.0.0/0" mean in MongoDB Atlas Network Access and what is its security implication?',
+    answer: '0.0.0.0/0 in CIDR notation represents all IPv4 addresses globally (any IP). In MongoDB Atlas, adding 0.0.0.0/0 allows incoming database connections from any IP. This is needed for serverless hosts like Vercel because Vercel functions run on dynamic IP pools. However, it means the cluster is accessible from anywhere on the internet, so a strong, complex database password and least-privilege user permissions are mandatory.',
+    category: 'MongoDB',
+    difficulty: 'Intermediate',
+  },
+  {
+    id: 12,
+    question: 'Explain Express middleware and the purpose of the `next()` callback.',
+    answer: 'Express middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle. They can execute code, modify req and res, end the cycle (by sending res.json()), or call next() to pass control to the next handler in the stack. If next() is not called and no response is sent, the request hangs.',
+    category: 'Express & Node',
+    difficulty: 'Intermediate',
+  },
+];

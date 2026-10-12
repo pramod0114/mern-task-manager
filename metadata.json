@@ -1,0 +1,6 @@
+{
+  "name": "MERN Task Manager — SY MCA Lab Practical 10",
+  "description": "Complete MERN Stack Task Manager and Practical No. 10 reference implementation with MongoDB Atlas, Express REST API, React, and Vercel deployment guide.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
